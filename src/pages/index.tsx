@@ -1,98 +1,120 @@
-import { AiOutlineDown, AiOutlinePlus, AiOutlineRadarChart } from "react-icons/ai";
 import WeeklyChartbox from "@/components/charts/weekly/WeeklyChartbox";
-import { FiChevronDown } from "react-icons/fi";
+import Profilebar from "@/components/bar/Profilebar";
+
+import FitlogModal from "@/components/modal/FitlogModal";
+import Notificationbar from "@/components/bar/notification/Notificationbar";
+import Image from "next/image";
+import { BiDumbbell } from "react-icons/bi";
+import { AiOutlineRadarChart } from "react-icons/ai";
 
 const data = [
   {
     index: 1,
-    date: '01.05.2023',
-    dateName: 'Pazartesi',
+    date: "01.05.2023",
+    dateName: "Pazartesi",
     set: 3,
     repeat: 16,
     total: 48,
-    weight: 6
+    weight: 6,
   },
   {
     index: 2,
-    date: '02.05.2023',
-    dateName: 'Salı',
+    date: "02.05.2023",
+    dateName: "Salı",
     set: 3,
     repeat: 20,
     total: 60,
-    weight: 6
+    weight: 6,
   },
   {
     index: 3,
-    date: '03.05.2023',
-    dateName: 'Çarşamba',
+    date: "03.05.2023",
+    dateName: "Çarşamba",
     set: 3,
     repeat: 24,
     total: 72,
-    weight: 6
+    weight: 6,
   },
   {
     index: 3,
-    date: '03.05.2023',
-    dateName: 'Perşembe',
+    date: "03.05.2023",
+    dateName: "Perşembe",
     set: 3,
     repeat: 24,
     total: 72,
-    weight: 6
+    weight: 6,
   },
   {
     index: 3,
-    date: '03.05.2023',
-    dateName: 'Cuma',
+    date: "03.05.2023",
+    dateName: "Cuma",
     set: 3,
     repeat: 24,
     total: 72,
-    weight: 6
+    weight: 6,
   },
   {
     index: 3,
-    date: '03.05.2023',
-    dateName: 'Cumartesi',
+    date: "03.05.2023",
+    dateName: "Cumartesi",
     set: 3,
     repeat: 24,
     total: 72,
-    weight: 6
+    weight: 6,
   },
   {
     index: 3,
-    date: '03.05.2023',
-    dateName: 'Pazar',
+    date: "03.05.2023",
+    dateName: "Pazar",
     set: 3,
     repeat: 24,
     total: 72,
-    weight: 8
+    weight: 8,
   },
 ];
 
-
-const options = [
-  'one', 'two', 'three'
-];
-
-
-export default function Home() { 
+export default function Home() {
   return (
-    <main className="Home w-full h-full overflow-auto">
-      <div className="bar flex justify-between place-items-center m-9 mb-11">
-        <div className="title">
-          <h1 className="text-white font-bold text-2xl">FitLog</h1>
+      <main className="Home w-full h-full flex flex-col gap-5 mb-32 bg-black overflow-y-auto">
+        <div className="m-8">
+          <Profilebar
+            className="bg-black"
+            nickname="4ykt_"
+            name="Aykut Alıcı"
+          />
         </div>
-        <button className="Profile flex gap-5 place-items-center">
-          <FiChevronDown size={16} className="text-white"/>
-          <div className="bg-indigo-600 rounded-full w-[42px] h-[42px] flex">
-            <p className="text-white text-center m-auto font-bold text-lg">A</p>
+
+        <div className="ContentWrapper">
+          <div className="WeeklyChartboxWrapper p-4 mx-6">
+            <WeeklyChartbox data={data} />
           </div>
-        </button>
-      </div>
 
-      <div className="WeeklyChartboxWrapper p-4 m-6">
-        <WeeklyChartbox data={data}/>
-      </div>
+          <div className="WeeklyChartboxWrapper p-4 mx-6">
+            <WeeklyChartbox data={data} />
+          </div>
 
-    </main>
+          <div className="WorkoutsWrapper mx-12 mt-16">
+            <div className="flex gap-4 rounded-t-xl">
+              <div className="w-1/2 flex bg-mirage-800 rounded-xl">
+                <div className="h-[40%] place-self-end w-full bg-blue-500 rounded-b-xl flex place-items-center rounded-t-xl">
+                  <BiDumbbell
+                    size={30}
+                    className="text-white m-auto rotate-[40deg]"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-5 w-1/2">
+                <button className="p-4 py-6 bg-green-600 transition-all duration-200 hover:bg-opacity-70 rounded-xl text-white text-center font-bold text-sm">
+                  Hareket Ekle
+                </button>
+                <button className="p-4 py-7 bg-mirage-400 transition-all duration-200 hover:bg-opacity-70 rounded-xl text-white text-center font-bold text-sm">
+                  İstatistikler
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
   );
 }

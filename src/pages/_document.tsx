@@ -1,5 +1,5 @@
-import Navbar from '@/components/bar/Navbar'
 import { Html, Head, Main, NextScript } from 'next/document'
+
 
 
 

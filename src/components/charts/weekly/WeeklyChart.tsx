@@ -53,7 +53,6 @@ export default function WeeklyChart(props: {data: any}) {
 */
 function CustomTooltip(props: {active: any | undefined, payload: any | undefined, label: string | undefined}) {
     if (props.active && props.payload && props.payload.length) {
-      console.log(props.payload)
       return (
         <div className="CustomTooltip p-5 px-8 min-w-64 bg-cod-gray-800 rounded-lg text-white scale-75">
           <p className="label font-bold text-md">{`${props.label}`}</p>

@@ -1,19 +1,27 @@
 import React from "react";
 import WeeklyChart from "./WeeklyChart";
 import { GoKebabVertical } from "react-icons/go";
-import { atom, useAtom } from "jotai";
-import conf from '@/conf/category.json'
+import { atom, useAtom, useAtomValue } from "jotai";
 import FitlogModal from "@/components/modal/FitlogModal";
+import { workoutsAtom } from "@/atoms/workouts";
 
 const modalAtom = atom(false);
-const categoryConf = JSON.parse(JSON.stringify(conf));
+
 
 export default function WeeklyChartbox(props: { data: any }) {
   const percent = calculatePercent(props.data);
   const decimalPercent = toDecimal(1, percent);
   const [modalStatus, setModalStatus] = useAtom(modalAtom);
+
+  let color = "text-gray-700";
+  if (percent>0) color = "text-green-700";
+  if (percent<0) color = "text-red-700"
+
+  const workoutConf = useAtomValue(workoutsAtom);
+  const categoryConf = JSON.parse(JSON.stringify(workoutConf));
+
   return (
-    <div className="Weekly bg-black rounded-lg">
+    <div className="Weekly">
       <div className="flex justify-between">
         <div>
           <h3 className="place-self-center font-bold text-xs text-white opacity-50">
@@ -25,7 +33,7 @@ export default function WeeklyChartbox(props: { data: any }) {
           </h1>
           <h2
             className={
-              ((percent == 0 ? "text-gray-700" : (percent < 0 ? "text-red-700" : "text-green-700"))) +
+              color +
               " my-2 font-bold text-lg"
             }
           >
@@ -37,14 +45,14 @@ export default function WeeklyChartbox(props: { data: any }) {
         </button>
       </div>
       <WeeklyChart data={props.data} />
-        <FitlogModal isOpen={modalStatus} onCloseRequest={() => setModalStatus(false)} className="flex flex-col gap-8 p-8 pt-7 py-10 absolute bottom-0 w-full bg-cod-gray-500 rounded-t-3xl">
+        <FitlogModal position="bottom" isActive={modalStatus} onCloseRequest={() => setModalStatus(false)} className="flex flex-col gap-8 p-8 pt-7 py-10 w-full bg-cod-gray-500 rounded-t-3xl">
         <h1 className="text-white font-bold text-center">Select category</h1>
             <div className="flex flex-col gap-3">
             {
-                Object.keys(categoryConf['categories']).map((category) => {
+                Object.keys(categoryConf).map((category) => {
                     return (
                         <button onClick={() => {setModalStatus(false)}} key={category} className="text-white hover:opacity-50 transition-all duration-150 text-start text-md font-bold p-4">
-                            {categoryConf['categories'][category]['label']}
+                            {category}
                         </button>
                     );
                 })
